@@ -5,7 +5,7 @@ ENV REMOTE_FOLDER="huggingface:/hermes"
 
 # 2. 基础依赖
 RUN apt-get update && apt-get install -y \
-    ripgrep ffmpeg git nginx lsof build-essential psmisc \
+    ripgrep ffmpeg git nginx lsof build-essential psmisc openssh-server \
     && rm -rf /var/lib/apt/lists/*
 
 #RUN curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
