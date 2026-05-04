@@ -6,7 +6,7 @@ node -v
 echo -e "======================写入rclone配置========================\n"
 echo "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
 
-
+echo 'echo "root:${ROOT_PASSWORD}" | chpasswd';
 
 if [ -n "$RCLONE_CONF" ]; then
   echo "##########同步备份############"
