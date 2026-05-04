@@ -1,13 +1,15 @@
 FROM rclone/rclone:latest AS rclone
 FROM docker.io/nikolaik/python-nodejs:python3.11-nodejs23
 ENV REMOTE_FOLDER="huggingface:/hermes"
-
+ENV ROOT_PASSWORD roothermes
 
 # 2. 基础依赖
 RUN apt-get update && apt-get install -y \
     ripgrep ffmpeg git nginx lsof build-essential psmisc openssh-server \
+    sed -i 's/^#\(PermitRootLogin\) .*/\1 yes/' /etc/ssh/sshd_config; \
+    sed -i 's/^\(UsePAM yes\)/# \1/' /etc/ssh/sshd_config; \
     && rm -rf /var/lib/apt/lists/*
-
+ 
 #RUN curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
 RUN pip install --no-cache-dir git+https://github.com/NousResearch/hermes-agent.git
 
